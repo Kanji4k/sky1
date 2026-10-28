@@ -19,7 +19,17 @@ jobs:
         with:
           gradle-version: 9.2.1
 
-      - name: Check all project files uploaded
-        run: |
-          test -f src/main/resources/fabric.mod.json || { echo "MISSING src/main/resources (fabric.mod.json)"; exit 1; }
-          test -d intermediary-src/client/confis || { echo "MISSING
+      - name: Convert source names
+        run: python3 tools/yarnify.py
+
+      - name: Build
+        run: gradle build --no-daemon --stacktrace
+
+      - name: Upload jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: confis-mod-jar
+          path: |
+            build/libs/*.jar
+            !build/libs/*-sources.jar
+            !build/libs/*-dev.jar
