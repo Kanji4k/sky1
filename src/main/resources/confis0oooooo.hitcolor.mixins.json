@@ -1,0 +1,12 @@
+{
+  "required": false,
+  "package": "client.confis.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "HitColorQueueMixin",
+    "HitColorBatchMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
